@@ -18,6 +18,14 @@ export default function Home() {
     } else if (value === "C") {
       setResult("");
       setExpression("");
+    } else if (value === "sqrt") {
+      try {
+        const evalResult = Math.sqrt(parseFloat(expression)).toString();
+        setResult(evalResult);
+        setExpression(evalResult);
+      } catch (error) {
+        setResult("Error");
+      }
     } else {
       setExpression((prevExpression) => prevExpression + value);
     }
@@ -41,6 +49,7 @@ export default function Home() {
     "=",
     "+",
     "C",
+    "sqrt", // Add square root button
   ];
 
   return (
@@ -67,10 +76,12 @@ export default function Home() {
               className={`text-2xl p-4 rounded-lg ${
                 btn === "=" || btn === "C"
                   ? "bg-orange-400 text-white"
+                  : btn === "sqrt"
+                  ? "bg-gray-500 text-white" // Style for square root button
                   : "bg-gray-200 text-black"
               } hover:bg-gray-300 active:bg-gray-400 focus:outline-none`}
             >
-              {btn}
+              {btn === "sqrt" ? "√" : btn}{" "}
             </button>
           ))}
         </div>
